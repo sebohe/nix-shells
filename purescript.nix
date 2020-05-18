@@ -1,11 +1,12 @@
 with import <nixpkgs> { };
 
 stdenv.mkDerivation {
-  name = "go";
+  name = "dev";
   buildInputs = [
-    go_1_13
-    gcc
-    git
+  	purescript
+	nodePackages.bower 
+	nodePackages.pulp
+	nodejs-12_x
   ];
   shellHook = "";
 }

@@ -5,8 +5,8 @@ with pkgs;
 let
   inherit (lib) optional optionals;
 
-  elixir = beam.packages.erlangR21.elixir_1_7;
-  nodejs = nodejs-10_x;
+  elixir = beam.packages.erlangR22.elixir_1_9;
+  nodejs = nodejs-12_x;
   postgresql = postgresql_10;
 in
 
@@ -19,12 +19,19 @@ mkShell {
       CoreServices
     ]);
 
-    # Put the PostgreSQL databases in the project diretory.
     shellHook = ''
       export PGDATA="$PWD/db"
-      mix local.hex
-      mix archive.install hex phx_new 1.4.10
-      mix ecto.create
-      mix phx.server
+
+      setup() {
+        mix local.hex
+        mix archive.install hex phx_new 1.4.10
+        mix ecto.create
+      }
+
+      help () {
+        echo 'Setup new environment: setup'
+        echo 'Create new app: mix phx.new app'
+        echo 'Start server: mix phx.server'
+      }
     '';
 }

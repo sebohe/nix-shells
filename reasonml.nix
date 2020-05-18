@@ -1,11 +1,8 @@
 with import <nixpkgs> { };
 
 stdenv.mkDerivation {
-  name = "go";
+  name = "dev";
   buildInputs = [
-    go_1_13
-    gcc
-    git
+  	reason-language-server
   ];
-  shellHook = "";
 }
